@@ -29,7 +29,7 @@ Hệ thống bao gồm 4 thành phần lõi phối hợp chặt chẽ với nhau
 Để khai thác hiệu quả các chức năng của Wazuh, mô hình sẽ bao gồm hai thành phần chính: Wazuh Server và Wazuh Agent. Trong đó, Wazuh Server đóng vai trò duy trì một giao diện web để quản lý và giám sát, đồng thời thu thập và phân tích dữ liệu từ các agent. Wazuh Agent được cài đặt trên các máy chủ hoặc thiết bị cần giám sát, gửi dữ liệu về cho Wazuh Server để xử lý và hiển thị thông tin chi tiết về an ninh mạng.
  
 Dưới đây là mô hình hệ thống triển khai theo kịch bản đã xây dựng.
- ![Sơ đồ hệ thống](docs/images/1.png)
+            ![Sơ đồ hệ thống](docs/images/1.png)
 > **Hình 3.1:** Sơ đồ hệ thống
  
 Phạm vi giám sát: Mô hình giám sát được triển khai nhằm theo dõi hoạt động trên endpoint Linux. Suricata NIDS được sử dụng để phát hiện xâm nhập mạng, trong khi Yara giám sát các hoạt động độc hại trên endpoint Linux. Các hoạt động đó được giám sát thông qua Wazuh Server. Endpoint Linux là mục tiêu của tấn công SSH brute-force từ máy tấn công Kali Linux. Mô hình tích hợp các công cụ nhằm đảm bảo khả năng giám sát, phát hiện và phản ứng nhanh với các mối đe dọa an ninh mạng.
