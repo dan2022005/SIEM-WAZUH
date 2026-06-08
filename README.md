@@ -37,12 +37,12 @@ Phạm vi giám sát: Mô hình giám sát được triển khai nhằm theo dõ
  
 ## 3. Các tính năng an ninh nổi bật (Key Features)
  
-- 🔍 **Phân tích log và phát hiện mối đe dọa:** Tự động thu thập log từ hệ điều hành, ứng dụng, thiết bị mạng (qua Syslog cổng tùy chỉnh như TCP/UDP). Log thô sau đó được giải mã, trích xuất trường thông tin (IP, Username, Event ID...) và đối sánh luật để đưa ra cảnh báo thời gian thực.
-- 📂 **Giám sát toàn vẹn tệp tin (FIM):** Định kỳ quét và tính toán mã băm (checksum SHA1) của các tệp tin hệ thống và khóa Windows Registry. Cơ chế đồng bộ hóa giữa Agent và Manager giúp phát hiện ngay lập tức các hành vi sửa đổi thuộc tính, thay đổi quyền, tạo mới hoặc xóa tệp tin đáng ngờ mà hoàn toàn không gây ảnh hưởng đến hiệu năng hay an toàn thông tin của endpoint.
-- ⚡ **Phản hồi chủ động (Active Response):** Tự động kích hoạt các kịch bản ứng phó sự cố (Scripts) được cấu hình sẵn trên Agent dưới dạng *Stateful* (có thời gian hoàn tác, ví dụ: chặn IP bằng tường lửa trong 30 phút) hoặc *Stateless* (hành động một lần như cô lập tiến trình, xóa file độc hại).
-- 🛡️ **Phát hiện lỗ hổng bảo mật:** Mô-đun `vulnerability-detector` liên tục thu thập danh sách phần mềm cài đặt trên endpoint, đối chiếu trực tiếp với kho dữ liệu Cyber Threat Intelligence (Cơ sở dữ liệu CVE từ NVD, Canonical, RedHat...) để phát hiện sớm các phần mềm tồn tại lỗi bảo mật.
-- 📋 **Đánh giá cấu hình bảo mật (SCA):** Rà quét và đánh giá cấu hình hệ thống dựa trên các bảng danh sách kiểm tra của tiêu chuẩn quốc tế **CIS (Center for Internet Security)** nhằm phát hiện lỗi cấu hình sai, mật khẩu yếu hoặc các lỗ hổng hệ thống.
-- 🪱 **Phát hiện mã độc (Rootcheck):** Quét sâu hệ thống để phát hiện các dấu hiệu bất thường cấp hạt nhân của Rootkit thông qua kiểm tra tiến trình ẩn, tệp tin bị che giấu, cổng mạng bất thường và các tệp có quyền ghi suid nguy hiểm.
+-  **Phân tích log và phát hiện mối đe dọa:** Tự động thu thập log từ hệ điều hành, ứng dụng, thiết bị mạng (qua Syslog cổng tùy chỉnh như TCP/UDP). Log thô sau đó được giải mã, trích xuất trường thông tin (IP, Username, Event ID...) và đối sánh luật để đưa ra cảnh báo thời gian thực.
+-  **Giám sát toàn vẹn tệp tin (FIM):** Định kỳ quét và tính toán mã băm (checksum SHA1) của các tệp tin hệ thống và khóa Windows Registry. Cơ chế đồng bộ hóa giữa Agent và Manager giúp phát hiện ngay lập tức các hành vi sửa đổi thuộc tính, thay đổi quyền, tạo mới hoặc xóa tệp tin đáng ngờ mà hoàn toàn không gây ảnh hưởng đến hiệu năng hay an toàn thông tin của endpoint.
+-  **Phản hồi chủ động (Active Response):** Tự động kích hoạt các kịch bản ứng phó sự cố (Scripts) được cấu hình sẵn trên Agent dưới dạng *Stateful* (có thời gian hoàn tác, ví dụ: chặn IP bằng tường lửa trong 30 phút) hoặc *Stateless* (hành động một lần như cô lập tiến trình, xóa file độc hại).
+-  **Phát hiện lỗ hổng bảo mật:** Mô-đun `vulnerability-detector` liên tục thu thập danh sách phần mềm cài đặt trên endpoint, đối chiếu trực tiếp với kho dữ liệu Cyber Threat Intelligence (Cơ sở dữ liệu CVE từ NVD, Canonical, RedHat...) để phát hiện sớm các phần mềm tồn tại lỗi bảo mật.
+-  **Đánh giá cấu hình bảo mật (SCA):** Rà quét và đánh giá cấu hình hệ thống dựa trên các bảng danh sách kiểm tra của tiêu chuẩn quốc tế **CIS (Center for Internet Security)** nhằm phát hiện lỗi cấu hình sai, mật khẩu yếu hoặc các lỗ hổng hệ thống.
+-  **Phát hiện mã độc (Rootcheck):** Quét sâu hệ thống để phát hiện các dấu hiệu bất thường cấp hạt nhân của Rootkit thông qua kiểm tra tiến trình ẩn, tệp tin bị che giấu, cổng mạng bất thường và các tệp có quyền ghi suid nguy hiểm.
 ---
  
 ## 4. Giải pháp tích hợp hệ thống mở rộng (Integrations)
