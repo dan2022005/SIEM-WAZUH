@@ -22,14 +22,14 @@ Hệ thống bao gồm 4 thành phần lõi phối hợp chặt chẽ với nhau
  
 - **Wazuh Indexer:** Công cụ phân tích và tìm kiếm toàn văn (full-text search) có hiệu năng cao, chịu trách nhiệm lập chỉ mục và lưu trữ dữ liệu cảnh báo dưới định dạng JSON. Sử dụng các chỉ mục chuyên biệt: `wazuh-alerts`, `wazuh-archives`, `wazuh-monitoring`, và `wazuh-statistic`.
 - **Wazuh Agent:** Phần mềm gọn nhẹ cài đặt trên các endpoint (Linux, Windows, macOS, Cloud...) để thu thập dữ liệu nhật ký, giám sát cấu hình hệ thống, kiểm tra tính toàn vẹn tệp và thực thi các lệnh phản hồi.
-- **Wazuh Server:** Trung tâm xử lý logic chứa **Analysis Engine** để giải mã log (Decoding) và đối sánh bộ quy tắc (Rule matching) để phát hiện mối đe dọa. Thành phần này tích hợp 'Wazuh RESTful API', 'Wazuh Cluster Daemon' (hỗ trợ scale cụm Multi-node) và 'Filebeat' để đẩy dữ liệu sang Indexer.
+- **Wazuh Server:** Trung tâm xử lý logic chứa **Analysis Engine** để giải mã log (Decoding) và đối sánh bộ quy tắc (Rule matching) để phát hiện mối đe dọa. Thành phần này tích hợp `Wazuh RESTful API`, `Wazuh Cluster Daemon` (hỗ trợ scale cụm Multi-node) và `Filebeat` để đẩy dữ liệu sang Indexer.
 - **Wazuh Dashboard:** Giao diện Web trực quan (UI) giúp quản trị viên SOC theo dõi, truy vấn nâng cao, phân tích biểu đồ log và quản lý tập trung trạng thái của toàn bộ hệ thống Agent.
 ### 2.2. Mô hình triển khai
  
 Để khai thác hiệu quả các chức năng của Wazuh, mô hình sẽ bao gồm hai thành phần chính: Wazuh Server và Wazuh Agent. Trong đó, Wazuh Server đóng vai trò duy trì một giao diện web để quản lý và giám sát, đồng thời thu thập và phân tích dữ liệu từ các agent. Wazuh Agent được cài đặt trên các máy chủ hoặc thiết bị cần giám sát, gửi dữ liệu về cho Wazuh Server để xử lý và hiển thị thông tin chi tiết về an ninh mạng.
  
 Dưới đây là mô hình hệ thống triển khai theo kịch bản đã xây dựng.
-            ![Sơ đồ hệ thống](docs/images/1.png)
+![Sơ đồ hệ thống](docs/images/1.png)
  
 Phạm vi giám sát: Mô hình giám sát được triển khai nhằm theo dõi hoạt động trên endpoint Linux. Suricata NIDS được sử dụng để phát hiện xâm nhập mạng, trong khi Yara giám sát các hoạt động độc hại trên endpoint Linux. Các hoạt động đó được giám sát thông qua Wazuh Server. Endpoint Linux là mục tiêu của tấn công SSH brute-force từ máy tấn công Kali Linux. Mô hình tích hợp các công cụ nhằm đảm bảo khả năng giám sát, phát hiện và phản ứng nhanh với các mối đe dọa an ninh mạng.
  
@@ -483,8 +483,7 @@ Cấu hình trên máy Wazuh agent với quyền root. Truy cập vào tệp `/v
 ```
  
 Truy cập vào Wazuh dashboard để hiển thị trực quan cảnh báo, ở đây ta sẽ thấy được thời gian, tên máy agent đã thay đổi, đường dẫn, sự kiện cũng như `rule.level` và `rule.id`.
- 
-> **Hình 3.2:** Log cảnh báo tính toàn vẹn của thư mục root
+ ![Log cảnh báo tính toàn vẹn của thư mục root](docs/images/2.png)
  
 **Phát hiện và ngăn chặn tấn công SSH brute-force**
  
