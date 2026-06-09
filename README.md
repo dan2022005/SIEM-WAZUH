@@ -483,6 +483,7 @@ Cấu hình trên máy Wazuh agent với quyền root. Truy cập vào tệp `/v
 ```
  
 Truy cập vào Wazuh dashboard để hiển thị trực quan cảnh báo, ở đây ta sẽ thấy được thời gian, tên máy agent đã thay đổi, đường dẫn, sự kiện cũng như `rule.level` và `rule.id`.
+ 
  ![Log cảnh báo tính toàn vẹn của thư mục root](docs/images/2.png)
  
 **Phát hiện và ngăn chặn tấn công SSH brute-force**
