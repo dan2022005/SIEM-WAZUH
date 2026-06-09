@@ -22,7 +22,7 @@ Hệ thống bao gồm 4 thành phần lõi phối hợp chặt chẽ với nhau
  
 - **Wazuh Indexer:** Công cụ phân tích và tìm kiếm toàn văn (full-text search) có hiệu năng cao, chịu trách nhiệm lập chỉ mục và lưu trữ dữ liệu cảnh báo dưới định dạng JSON. Sử dụng các chỉ mục chuyên biệt: `wazuh-alerts`, `wazuh-archives`, `wazuh-monitoring`, và `wazuh-statistic`.
 - **Wazuh Agent:** Phần mềm gọn nhẹ cài đặt trên các endpoint (Linux, Windows, macOS, Cloud...) để thu thập dữ liệu nhật ký, giám sát cấu hình hệ thống, kiểm tra tính toàn vẹn tệp và thực thi các lệnh phản hồi.
-- **Wazuh Server:** Trung tâm xử lý logic chứa **Analysis Engine** để giải mã log (Decoding) và đối sánh bộ quy tắc (Rule matching) để phát hiện mối đe dọa. Thành phần này tích hợp *Wazuh RESTful API*, *Wazuh Cluster Daemon* (hỗ trợ scale cụm Multi-node) và *Filebeat* để đẩy dữ liệu sang Indexer.
+- **Wazuh Server:** Trung tâm xử lý logic chứa **Analysis Engine** để giải mã log (Decoding) và đối sánh bộ quy tắc (Rule matching) để phát hiện mối đe dọa. Thành phần này tích hợp 'Wazuh RESTful API', 'Wazuh Cluster Daemon' (hỗ trợ scale cụm Multi-node) và 'Filebeat' để đẩy dữ liệu sang Indexer.
 - **Wazuh Dashboard:** Giao diện Web trực quan (UI) giúp quản trị viên SOC theo dõi, truy vấn nâng cao, phân tích biểu đồ log và quản lý tập trung trạng thái của toàn bộ hệ thống Agent.
 ### 2.2. Mô hình triển khai
  
