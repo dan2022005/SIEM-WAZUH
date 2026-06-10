@@ -521,9 +521,9 @@ hydra -l [USERNAME] -P pass.txt ssh://[IP_AGENT] -t 4 -V
 ```
  
 Truy cập Wazuh dashboard để xem cảnh báo:
- 
-> **Hình 3.3:** Log cảnh báo tấn công SSH brute-force
- 
+
+ ![Log cảnh báo tấn công SSH brute-force](docs/images/3.png)
+
 Bây giờ chúng ta sẽ cấu hình trên máy wazuh-server để chặn lại cuộc tấn công này. Mở file `/var/ossec/etc/ossec.conf` để cấu hình sau đây bên trong khối `<ossec_config>`:
  
 ```xml
@@ -555,12 +555,11 @@ hydra -l [USERNAME] -P pass.txt ssh://[IP_AGENT]
 ```
  
 Sau đó vào wazuh-dashboard ta sẽ thấy máy đã bị chặn kết nối:
- 
-> **Hình 3.4:** Log hiển thị đã chặn tấn công SSH brute-force
- 
+  ![Log hiển thị đã chặn tấn công SSH brute-force](docs/images/4.png)
+
 Sau đó chúng ta sang máy agent và kết quả là IP máy của kẻ tấn công đã bị chặn:
- 
-> **Hình 3.5:** IP của kẻ tấn công đã bị tường lửa khóa
+ ![IP của kẻ tấn công đã bị tường lửa khóa](docs/images/5.png)
+
  
 #### 5.2.2. Phát hiện tấn công NIDS
  
@@ -573,8 +572,8 @@ sudo nmap -p- -T4 -A [IP_AGENT]
 ```
  
 Ta sẽ nhận được cảnh báo về việc quét cổng mạng có `rule.id = 86601` và `rule.level = 3`:
- 
-> **Hình 3.6:** Log hiển thị cảnh báo dò quét mạng của Suricata
+ ![Log hiển thị cảnh báo dò quét mạng của Suricata](docs/images/6.png)
+
  
 Chúng ta xem kỹ 1 log sẽ thấy rất nhiều thành phần và chúng ta cũng sẽ thấy được IP của kẻ dò quét mạng.
  
