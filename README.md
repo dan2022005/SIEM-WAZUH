@@ -64,7 +64,7 @@ Phạm vi giám sát: Mô hình giám sát được triển khai nhằm theo dõ
  
 **a) Cài đặt Wazuh Indexer**
  
-Khởi động máy kali, chạy với quyền root:
+Khởi động máy Kali Wazuh Server , chạy với quyền root:
  
 ```bash
 # Tải xuống trình trợ giúp cài đặt Wazuh và tệp cấu hình
@@ -141,7 +141,7 @@ curl -k -u admin https://<WAZUH_INDEXER_IP_ADDRESS>:9200/_cat/nodes?v
  
 **b) Cài đặt Wazuh Server**
  
-Khởi động máy kali, chạy với quyền root:
+Khởi động máy Kali Wazuh Server, chạy với quyền root:
  
 ```bash
 # Chạy trình trợ giúp cài đặt Wazuh với tùy chọn --wazuh-server
@@ -151,7 +151,7 @@ bash wazuh-install.sh --wazuh-server wazuh-1
  
 **c) Cài đặt Wazuh Dashboard**
  
-Khởi động máy kali, chạy với quyền root:
+Khởi động máy Kali Wazuh Server, chạy với quyền root:
  
 ```bash
 # Chạy trình trợ giúp cài đặt Wazuh với tùy chọn --wazuh-dashboard
@@ -167,7 +167,7 @@ apt update
  
 #### 5.1.2. Cài đặt Wazuh Agent trên máy Kali-client
  
-Khởi động máy kali, chạy với quyền root:
+Khởi động máy Kali Wazuh Agent, chạy với quyền root:
  
 ```bash
 # Thêm kho lưu trữ Wazuh
@@ -191,7 +191,7 @@ apt-get update
 ```bash
 # Triển khai Wazuh Agent
 # Thay thế giá trị WAZUH_MANAGER bằng địa chỉ IP hoặc tên máy chủ của trình quản lý Wazuh
-WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent
+WAZUH_MANAGER="10.0.0.2" apt-get install Wazuh Agent
 ```
  
 ```bash
@@ -209,7 +209,7 @@ apt-get update
  
 #### 5.1.3. Cài đặt và tích hợp Suricata trên Wazuh
  
-Khởi động máy wazuh-agent, mở terminal để tải Suricata:
+Khởi động máy Wazuh Agent, mở terminal để tải Suricata:
  
 ```bash
 sudo apt update && sudo apt install suricata -y
@@ -260,14 +260,14 @@ sudo systemctl restart wazuh-agent
  
 #### 5.1.4. Cài đặt và tích hợp YARA trên Wazuh
  
-Ở máy wazuh-agent, mở terminal để cài đặt môi trường YARA:
+Ở máy Wazuh Agent, mở terminal để cài đặt môi trường YARA:
  
 ```bash
 sudo apt update
 sudo apt install -y make gcc autoconf libtool libssl-dev pkg-config jq curl
 ```
  
-Tải phiên bản mã nguồn chính thức của YARA, giải nén và tiến hành biên dịch trực tiếp trên wazuh-agent:
+Tải phiên bản mã nguồn chính thức của YARA, giải nén và tiến hành biên dịch trực tiếp trên Wazuh Agent:
  
 ```bash
 sudo curl -LO https://github.com/VirusTotal/yara/archive/v4.5.5.tar.gz
@@ -374,13 +374,13 @@ Thêm đoạn mã sau vào bên trong khối `<syscheck>` của Wazuh-agent đ�
 <directories realtime="yes">/tmp/yara/malware</directories>
 ```
  
-Khởi động lại wazuh-agent:
+Khởi động lại Wazuh Agent:
  
 ```bash
 sudo systemctl restart wazuh-agent
 ```
  
-Bây giờ chúng ta sẽ cấu hình trên máy wazuh-server. Mở file định nghĩa decoder tùy chỉnh:
+Bây giờ chúng ta sẽ cấu hình trên máy Wazuh Server. Mở file định nghĩa decoder tùy chỉnh:
  
 ```bash
 sudo nano /var/ossec/etc/decoders/local_decoder.xml
@@ -469,37 +469,36 @@ sudo systemctl restart wazuh-manager
 ---
  
 ### 5.2. Triển khai hệ thống SIEM Wazuh và đánh giá hệ thống
+
  
-#### 5.2.1. Giám sát và phát hiện tiến trình nhạy cảm
+#### 5.2.1. Giám sát tính toàn vẹn của tệp
  
-**Giám sát tính toàn vẹn của tệp**
+Kịch bản ở đây là giám sát thư mục root của máy Wazuh Agent, tránh để cho nhân viên hoặc hacker sửa đổi hoặc tạo file nào đó với mục đích xấu (thư mục root chứa nhiều thông tin quan trọng).
  
-Kịch bản ở đây là giám sát thư mục root của máy agent, tránh để cho nhân viên hoặc hacker sửa đổi hoặc tạo file nào đó với mục đích xấu (thư mục root chứa nhiều thông tin quan trọng).
- 
-Cấu hình trên máy Wazuh agent với quyền root. Truy cập vào tệp `/var/ossec/etc/ossec.conf`, ở đây ta sẽ giám sát thư mục root và ta thêm dòng lệnh trong khối `<syscheck>`:
+Cấu hình trên máy Wazuh Agent với quyền root. Truy cập vào tệp `/var/ossec/etc/ossec.conf`, ở đây ta sẽ giám sát thư mục root và ta thêm dòng lệnh trong khối `<syscheck>`:
  
 ```xml
 <directories check_all="yes" report_changes="yes" realtime="yes">/root</directories>
 ```
  
-Truy cập vào Wazuh dashboard để hiển thị trực quan cảnh báo, ở đây ta sẽ thấy được thời gian, tên máy agent đã thay đổi, đường dẫn, sự kiện cũng như `rule.level` và `rule.id`.
+Truy cập vào Wazuh dashboard để hiển thị trực quan cảnh báo, ở đây ta sẽ thấy được thời gian, tên máy Wazuh Agent đã thay đổi, đường dẫn, sự kiện cũng như `rule.level` và `rule.id`.
  
  ![Log cảnh báo tính toàn vẹn của thư mục root](docs/images/2.png)
  
-**Phát hiện và ngăn chặn tấn công SSH brute-force**
+#### 5.2.2.Phát hiện và ngăn chặn tấn công SSH brute-force
  
-Kịch bản ở đây là trên máy của kẻ tấn công có một file `pass.txt` ghi 10 mật khẩu mà kẻ tấn công nghi ngờ đó là mật khẩu của máy agent — ở đây kẻ tấn công là một người nội bộ của công ty, có tên đăng nhập và lén bật cổng SSH trên máy agent để tấn công vào cổng SSH.
+Kịch bản ở đây là trên máy của kẻ tấn công có một file `pass.txt` ghi 10 mật khẩu mà kẻ tấn công nghi ngờ đó là mật khẩu của máy  Wazuh Agent — ở đây kẻ tấn công là một người nội bộ của công ty, có tên đăng nhập và lén bật cổng SSH trên máy agent để tấn công vào cổng SSH.
  
 Nhiệm vụ của phần này là phát hiện tấn công SSH brute-force và cấu hình để ngăn chặn không cho kẻ tấn công có thể tiếp tục.
  
-Trên máy Wazuh agent, bật dịch vụ SSH chạy với quyền root:
+Trên máy Wazuh Agent, bật dịch vụ SSH chạy với quyền root:
  
 ```bash
 systemctl enable ssh
 systemctl start ssh
 ```
  
-Tiếp tục mở file cấu hình `/var/ossec/etc/ossec.conf` trên Wazuh agent và ta thêm dòng lệnh với quyền root (cấu hình bên trong khối `<ossec_config>`):
+Tiếp tục mở file cấu hình `/var/ossec/etc/ossec.conf` trên Wazuh Agent và ta thêm dòng lệnh với quyền root (cấu hình bên trong khối `<ossec_config>`):
  
 ```xml
 <localfile>
@@ -508,13 +507,13 @@ Tiếp tục mở file cấu hình `/var/ossec/etc/ossec.conf` trên Wazuh agent
 </localfile>
 ```
  
-Khởi động lại Wazuh agent:
+Khởi động lại Wazuh Agent:
  
 ```bash
 sudo systemctl restart wazuh-agent
 ```
  
-Khởi động máy Kali attacks và thực hiện tấn công SSH brute-force bằng hydra với quyền root (Thay thế `[IP_AGENT]` = IP của máy Wazuh Agent):
+Khởi động máy Kali Attacks và thực hiện tấn công SSH brute-force bằng hydra với quyền root (Thay thế `[IP_AGENT]` = IP của máy Wazuh Agent):
  
 ```bash
 hydra -l [USERNAME] -P pass.txt ssh://[IP_AGENT] -t 4 -V
@@ -524,7 +523,7 @@ Truy cập Wazuh dashboard để xem cảnh báo:
 
  ![Log cảnh báo tấn công SSH brute-force](docs/images/3.png)
 
-Bây giờ chúng ta sẽ cấu hình trên máy wazuh-server để chặn lại cuộc tấn công này. Mở file `/var/ossec/etc/ossec.conf` để cấu hình sau đây bên trong khối `<ossec_config>`:
+Bây giờ chúng ta sẽ cấu hình trên máy Wazuh Server để chặn lại cuộc tấn công này. Mở file `/var/ossec/etc/ossec.conf` để cấu hình sau đây bên trong khối `<ossec_config>`:
  
 ```xml
 <command>
@@ -542,7 +541,7 @@ Bây giờ chúng ta sẽ cấu hình trên máy wazuh-server để chặn lại
 </active-response>
 ```
  
-Sau đó khởi động lại wazuh-server:
+Sau đó khởi động lại Wazuh Server:
  
 ```bash
 sudo systemctl restart wazuh-manager
@@ -554,18 +553,18 @@ Tiếp tục ở máy kali khởi động lại hydra để tấn công brute-fo
 hydra -l [USERNAME] -P pass.txt ssh://[IP_AGENT]
 ```
  
-Sau đó vào wazuh-dashboard ta sẽ thấy máy đã bị chặn kết nối:
+Sau đó vào Wazuh dashboard ta sẽ thấy máy đã bị chặn kết nối:
   ![Log hiển thị đã chặn tấn công SSH brute-force](docs/images/4.png)
 
-Sau đó chúng ta sang máy agent và kết quả là IP máy của kẻ tấn công đã bị chặn:
+Sau đó chúng ta sang máy Wazuh Agent và kết quả là IP máy của kẻ tấn công đã bị chặn:
  ![IP của kẻ tấn công đã bị tường lửa khóa](docs/images/5.png)
 
  
-#### 5.2.2. Phát hiện tấn công NIDS
+#### 5.2.3. Phát hiện tấn công NIDS
  
-Kịch bản trong phần sẽ là phát hiện kẻ tấn công thực hiện dò quét cổng mạng. Giả sử kẻ tấn công bằng cách nào đó có được IP của máy agent, hắn thực hiện thăm dò bằng cách dò quét các cổng mạng. Nhiệm vụ của chúng ta ở đây là phát hiện dò quét để kẻ tấn công không thể đạt được mục đích.
+Kịch bản trong phần sẽ là phát hiện kẻ tấn công thực hiện dò quét cổng mạng. Giả sử kẻ tấn công bằng cách nào đó có được IP của máy Wazuh Agent, hắn thực hiện thăm dò bằng cách dò quét các cổng mạng. Nhiệm vụ của chúng ta ở đây là phát hiện dò quét để kẻ tấn công không thể đạt được mục đích.
  
-Kẻ tấn công thực hiện dò quét các cổng của máy agent:
+Kẻ tấn công thực hiện dò quét các cổng của máy Wazuh Agent:
  
 ```bash
 sudo nmap -p- -T4 -A [IP_AGENT]
@@ -575,23 +574,59 @@ Ta sẽ nhận được cảnh báo về việc quét cổng mạng có `rule.id
  ![Log hiển thị cảnh báo dò quét mạng của Suricata](docs/images/6.png)
 
  
-Chúng ta xem kỹ 1 log sẽ thấy rất nhiều thành phần và chúng ta cũng sẽ thấy được IP của kẻ dò quét mạng.
- 
-Từ đó có thể cấu hình tường lửa để chặn IP của kẻ dò quét từ máy server:
- 
-```bash
-sudo /var/ossec/bin/agent_control -b <IP_KẺ_TẤN_CÔNG> -f firewall-drop180 -a <ID_AGENT>
+Sau khi phát hiện được dò quét mạng có rule.id = 86601, ta thực hiện cấu hình để ngăn chặn tự động
+
+Trên máy Wazuh Server, ta mở file `/var/ossec/etc/decoders/local_decoder.xml` để Wazuh Server có thể đọc được IP của kẻ tấn công
+ ```bash
+ <decoder name="json">
+  <prematch>^{\s*"</prematch>
+</decoder>
+
+<decoder name="json_child">
+  <parent>json</parent>
+  <regex type="pcre2">"src_ip":"([^"]+)"</regex>
+  <order>srcip</order>
+</decoder>
+
+<decoder name="json_child">
+  <parent>json</parent>
+  <plugin_decoder>JSON_Decoder</plugin_decoder>
+</decoder>
 ```
+Tiếp tục ở máy Wazuh Server, chúng ta thực hiện cấu hình để Wazuh Server khi phát hiện có kẻ tấn công, tự động thực hiện chặn ip kẻ tấn công trong file  `/var/ossec/etc/ossec.conf`
+ ```bash
+<active-response>
+    <command>firewall-drop</command>
+    <location>local</location>
+    <rules_id>86601</rules_id>
+    <timeout>180</timeout>      
+</active-response>
+```
+Và kéo lên đầu file tìm khối `<global>` dán IP máy Wazzuh Agent vào danh sách trắng để máy agent khi đọc được log của suricata sẽ không tự động chặn cả ip của máy Wazuh Server cũng như máy Wazuh Agent
+```bash
+<global>
+    <white_list>127.0.0.1</white_list>
+    <white_list>^localhost$</white_list>
+    <white_list>[IP_AGENT]</white_list>
+</global>
+```
+Khởi động lại Wazuh Server để nạp cấu hình mới
+Sang máy Kali Attacks thực hiện tấn công chạy lệnh quét cổng
+```bash
+sudo nmap -p- -T4 -A [IP_AGENT]
+```
+Ta nhận được cảnh báo từ việc quét cổng và cả thông báo về việc đã chặn kẻ tấn công
+ ![Log dò quét mạng và log hiển thị đã chặn dò quét mạng](docs/images/7.png)
+
+Sang máy Wazuh Agent để xem ip của kẻ tấn công và đã bị chặn
+  ![IP của kẻ dò quét đã bị tường lửa chặn](docs/images/8.png)
+
  
-Ở máy agent, chúng ta xem IP của kẻ tấn công bị chặn chưa:
+#### 5.2.4. Phát hiện phần mềm độc hại
  
-> **Hình 3.7:** IP của kẻ dò quét đã bị tường lửa chặn
+Kịch bản trong phần này sẽ là phát hiện máy agent tải một phần mềm độc hại về máy, Wazuh dashboard sẽ thông báo rằng đã tải file độc hại. Nhiệm vụ của chúng ta sẽ là phát hiện và phân tích log cảnh báo xem đã tải phần mềm độc hại là gì.
  
-#### 5.2.3. Phát hiện phần mềm độc hại
- 
-Kịch bản trong phần này sẽ là phát hiện máy agent tải một phần mềm độc hại về máy, wazuh-dashboard sẽ thông báo rằng đã tải file độc hại. Nhiệm vụ của chúng ta sẽ là phát hiện và phân tích log cảnh báo xem đã tải phần mềm độc hại là gì.
- 
-Ta sẽ tạo 1 file test mã độc mirai trên máy agent:
+Ta sẽ tạo 1 file test mã độc mirai trên máy Wazuh Agent:
  
 ```bash
 sudo curl -s https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/heads/4.14/resources/samples/mirai \
@@ -599,11 +634,9 @@ sudo curl -s https://raw.githubusercontent.com/wazuh/wazuh-documentation/refs/he
 ```
  
 Sau khi tạo xong sẽ có những cảnh báo của YARA về phần mềm đó:
- 
-> **Hình 3.8:** Log cảnh báo phát hiện phần mềm độc hại
+  ![Log cảnh báo phát hiện phần mềm độc hại](docs/images/9.png)
  
 Chúng ta sẽ xem kỹ hơn log của file nguy hiểm đó:
- 
-> **Hình 3.9:** Log đầy đủ của một cảnh báo phát hiện phần mềm độc hại
+ ![Log đầy đủ của một cảnh báo phát hiện phần mềm độc hại](docs/images/9.png)
  
 Nhìn vào log này chúng ta sẽ thấy đường dẫn của file khi tải về cũng như `rule.id` và `rule.level`.
