@@ -220,7 +220,7 @@ Chỉnh sửa cài đặt Suricata trong tệp `/etc/suricata/suricata.yaml`:
 ```yaml
 vars:
   address-groups:
-    HOME_NET: "[192.168.111.150]"
+    HOME_NET: "[IP_AGENT]"
     EXTERNAL_NET: "any"
 ```
  
