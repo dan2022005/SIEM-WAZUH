@@ -640,3 +640,24 @@ Chúng ta sẽ xem kỹ hơn log của file nguy hiểm đó:
  ![Log đầy đủ của một cảnh báo phát hiện phần mềm độc hại](docs/images/9.png)
  
 Nhìn vào log này chúng ta sẽ thấy đường dẫn của file khi tải về cũng như `rule.id` và `rule.level`.
+
+---
+## Tài liệu tham khảo
+
+[1] Cuong N. X. (2023, July 9). Phát hiện xâm nhập mạng với Suricata. NGUYEN XUAN CUONG. https://nxcuong.ued.vn/vi/news/security/phat-hien-xam-nhap-mang-voi-suricata-97.html
+
+[2] Gupta, R. (2024). Security Monitoring with Wazuh: A hands-on guide to effective enterprise security using real-life use cases in Wazuh. Packt Publishing.
+
+[3] González-Granadillo, G. (n.d.). Security Information and Event Management (SIEM): Analysis, Trends, and Usage in Critical Infrastructures.
+
+[4] Wazuh. (n.d.). Wazuh documentation. Wazuh.com. Retrieved May 9, 2026, from https://documentation.wazuh.com/current/index.html
+
+[5] VNPT Cyber Immunity. (2023, August 30). Wazuh - Nền tảng bảo mật mã nguồn mở. https://sec.vnpt.vn/2023/08/wazuh-nen-tang-bao-mat-ma-nguon-mo/
+
+[6] VNPT Cyber Immunity. (2024, June 14). YARA – Công cụ phát hiện phần mềm độc hại. https://sec.vnpt.vn/2024/06/yara-cong-cu-phat-hien-phan-mem-doc-haii/
+
+[7] VNPT Cyber Immunity. (2024, June 14). YARA – Công cụ phát hiện phần mềm độc hại. https://sec.vnpt.vn/2024/06/yara-cong-cu-phat-hien-phan-mem-doc-haii/
+
+---
+
+> **Lưu ý:** Repository này được tạo ra với mục đích học tập và nghiên cứu.
