@@ -637,7 +637,7 @@ Sau khi tạo xong sẽ có những cảnh báo của YARA về phần mềm đ�
   ![Log cảnh báo phát hiện phần mềm độc hại](docs/images/9.png)
  
 Chúng ta sẽ xem kỹ hơn log của file nguy hiểm đó:
- ![Log đầy đủ của một cảnh báo phát hiện phần mềm độc hại](docs/images/9.png)
+ ![Log đầy đủ của một cảnh báo phát hiện phần mềm độc hại](docs/images/10.png)
  
 Nhìn vào log này chúng ta sẽ thấy đường dẫn của file khi tải về cũng như `rule.id` và `rule.level`.
 
